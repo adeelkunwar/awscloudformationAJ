@@ -1,0 +1,29 @@
+  "Parameters" : {
+          
+    "InstanceType" : {
+      "Description" : "WebServer EC2 instance type",
+      "Type" : "String",
+      "Default" : "t2.small",  
+    }
+  }
+
+  "Resources": {
+    "Mywebserver": {
+      "Type" : "AWS::EC2::Instance",
+      "Properties" : {
+        "InstanceType" : "t2.small",
+        "ImageId": "ami-0c2b8ca1dad447f8a",
+        "Tenancy" : "default",
+        "SubnetId": "subnet-1234567890abcdefg",
+         "Tags": [{ "Key": "Name", "Value": "Example Instance" }],
+         "SecurityGroups": [ { "Ref": "MySecurityGroup"}],
+         "KeyName": "example-key-pair",
+      }
+    },
+ "MySecurityGroup" : {
+  "Type" : "AWS::EC2::SecurityGroup",
+  "Properties" : {
+    "GroupDescription" : "Enable SSH"
+  }
+ }
+  }

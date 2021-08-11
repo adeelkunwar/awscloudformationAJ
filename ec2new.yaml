@@ -1,0 +1,17 @@
+Resources:
+  Mywebserver:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      InstanceType: t2.mirco
+      Tenancy: default
+      SubnetId: subnet-1234567890abcdefg
+      Tags:
+        - Key: Name
+          Value: Example Instance
+          Key: Purpose
+          Value: Tutorial Resource
+      SecurityGroupIds:
+        - sg-1234567890abcdefg
+      KeyName: example-key-pair
+    
+
