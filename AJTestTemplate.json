@@ -1,0 +1,44 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "AWS CloudFormation Sample Template: Sample template that can be used to test EC2 updates. **WARNING** This template creates an Amazon Ec2 Instance. You will be billed for the AWS resources used if you create a stack from this template.",
+  
+  "Parameters" : {
+          
+    "InstanceType" : {
+      "Description" : "WebServer EC2 instance type",
+      "Type" : "String",
+      "Default" : "t2.small"
+    },
+    "MyKeyName": {
+      "Type" : "AWS::EC2::KeyPair::KeyName",
+      "Description" : "Select Key Name for ec2 from the list",
+    }
+  },
+"Resources": {
+  "MyWebServer": {
+  "Type" : "AWS::EC2::Instance",
+  "Properties" : {
+      "AdditionalInfo" : "This is a sample EC2 Instance",
+      "DisableApiTermination" : "false",
+      "ImageId" : "ami-0c2b8ca1dad447f8a",
+      "InstanceInitiatedShutdownBehavior" : "stop",
+      "InstanceType" : "t2.small",
+      "Tags" : [ {"Key": "TypeofInstance","Value": "MyTutorialServer"}],
+      "Tenancy" : "default",
+      "SecurityGroups": [ { "Ref": "MySecurityGroup"}],
+      "KeyName": [ {"Ref": "MyKeyName"}]
+    }
+},
+ "MySecurityGroup" : {
+  "Type" : "AWS::EC2::SecurityGroup",
+  "Properties" : {
+    "GroupDescription" : "Allow http to client hosts",
+    "GroupName": "MyNewSecurityGroupTemplate",
+    "SecurityGroupIngress" : [ {"IpProtocol": "tcp", "FromPort": "80", "ToPort" : "80", "CidrIp": "0.0.0.0/0"} ]
+    
+    
+  }
+ }}
+}
+
